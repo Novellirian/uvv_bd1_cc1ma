@@ -1,7 +1,6 @@
 /*excluindo caso ja existam*/
-DROP USER if EXISTS rian;
 DROP DATABASE if EXISTS uvv;
-DROP SCHEMA if EXISTS lojas CASCADE;
+DROP USER if EXISTS rian;
 
 
 /*criação do usuario do database*/
