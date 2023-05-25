@@ -25,7 +25,6 @@ OWNER = rian;
 \c uvv rian;
 
 /*criação do schema*/
-
 CREATE SCHEMA lojas
 AUTHORIZATION "rian";
 
@@ -46,8 +45,11 @@ CREATE TABLE lojas.produtos (
                 imagem_arquivo VARCHAR(512),
                 imagem_charset VARCHAR(512),
                 imagem_ultima_atualizacao DATE,
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT produto_id PRIMARY KEY (produto_id)
 );
+
 /*Comentários acerca da tabela produtos e suas colunas*/
 COMMENT ON TABLE lojas.produtos IS 'tabela de produtos';
 COMMENT ON COLUMN lojas.produtos.produto_id IS 'id do produto';
@@ -71,6 +73,8 @@ CREATE TABLE lojas.lojas (
                 logo_arquivo VARCHAR(512),
                 logo_charset VARCHAR(512),
                 logo_ultima_atualizacao DATE,
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT loja_id PRIMARY KEY (loja_id)
 );
 
@@ -93,6 +97,8 @@ CREATE TABLE lojas.estoques (
                 loja_id NUMERIC(38) NOT NULL,
                 produto_id NUMERIC(38) NOT NULL,
                 quantidade NUMERIC(38) NOT NULL,
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT estoque_id PRIMARY KEY (estoque_id)
 );
 
@@ -112,6 +118,8 @@ CREATE TABLE lojas.clientes (
                 telefone1 VARCHAR(20),
                 telefone2 VARCHAR(20),
                 telefone3 VARCHAR(20),
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT cliente_id PRIMARY KEY (cliente_id)
 );
 
@@ -132,6 +140,8 @@ CREATE TABLE lojas.envios (
                 cliente_id NUMERIC(38) NOT NULL,
                 endereco_entrega VARCHAR(512) NOT NULL,
                 status VARCHAR(15) NOT NULL,
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT envio_id PRIMARY KEY (envio_id)
 );
 
@@ -151,6 +161,8 @@ CREATE TABLE lojas.pedidos (
                 cliente_id NUMERIC(38) NOT NULL,
                 status VARCHAR(15) NOT NULL,
                 loja_id NUMERIC(38) NOT NULL,
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT pedido_id PRIMARY KEY (pedido_id)
 );
 
@@ -171,6 +183,8 @@ CREATE TABLE lojas.pedidos_itens (
                 preco_unitario NUMERIC(10,2) NOT NULL,
                 quantidade NUMERIC(38) NOT NULL,
                 envio_id NUMERIC(38),
+  
+  /*cria a primary key da tabela*/
                 CONSTRAINT itens_id PRIMARY KEY (pedido_id, produto_id)
 );
 
@@ -184,6 +198,7 @@ COMMENT ON COLUMN lojas.pedidos_itens.quantidade IS 'quantidade de pedidos_itens
 COMMENT ON COLUMN lojas.pedidos_itens.envio_id IS 'id de envio dos pedidos_itens';
 
 
+/*Criação dos relacionamentos de PK's e FK's entre as tabelas*/
 ALTER TABLE lojas.estoques ADD CONSTRAINT produtos_estoques_fk
 FOREIGN KEY (produto_id)
 REFERENCES lojas.produtos (produto_id)
