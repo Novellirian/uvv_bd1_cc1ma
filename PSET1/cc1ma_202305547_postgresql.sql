@@ -56,7 +56,7 @@ COMMENT ON COLUMN lojas.produtos.detalhes IS 'detalhes dos produtos';
 COMMENT ON COLUMN lojas.produtos.imagem IS 'imagem dos produtos';
 COMMENT ON COLUMN lojas.produtos.imagem_arquivo IS 'arquivo das imagens dos produtos';
 COMMENT ON COLUMN lojas.produtos.imagem_ultima_atualizacao IS 'ultima atualizacao das imagens dos produtos';
-
+COMMENT ON COLUMN lojas.produtos.imagem_mime_type IS 'tipo de extensão da imagem';
 
 /*criação da tabela lojas*/
 CREATE TABLE lojas.lojas (
@@ -85,7 +85,7 @@ COMMENT ON COLUMN lojas.lojas.longitude IS 'longitude do endereço da loja';
 COMMENT ON COLUMN lojas.lojas.logo IS 'logo da loja';
 COMMENT ON COLUMN lojas.lojas.logo_arquivo IS 'arquivo do logo da loja';
 COMMENT ON COLUMN lojas.lojas.logo_ultima_atualizacao IS 'ultima atualizacao do logo das lojas';
-
+COMMENT ON COLUMN lojas.lojas.logo_mime_type IS 'tipo de extensão da imagem';
 
 /*criação da tabela estoques e suas colunas*/
 CREATE TABLE lojas.estoques (
