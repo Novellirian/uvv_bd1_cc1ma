@@ -9,7 +9,7 @@ CREATEDB
 SUPERUSER
 CREATEROLE
 LOGIN
-PASSWORD '12345';
+PASSWORD 'abc';
 
 /*criação do database*/
 CREATE DATABASE uvv  WITH
@@ -22,7 +22,7 @@ ALLOW_CONNECTIONS = TRUE
 CONNECTION LIMIT = -1;
 
 /*conexão com o banco de dados*/
-\c uvv rian;
+\c 'dbname= uvv user=rian password=abc';;
 
 /*criação do schema*/
 CREATE SCHEMA lojas
@@ -102,6 +102,11 @@ CREATE TABLE lojas.estoques (
                 CONSTRAINT estoque_id PRIMARY KEY (estoque_id)
 );
 
+/*Adiciona uma restrição na coluna quantidade*/
+ALTER TABLE lojas.estoques
+ADD CONSTRAINT cc_lojas_estoques_quantidade
+CHECK (quantidade > 0);
+
 /*comentarios acerca da tabela estoques e suas colunas*/
 COMMENT ON TABLE lojas.estoques IS 'tabela de estoques';
 COMMENT ON COLUMN lojas.estoques.estoque_id IS 'id dos estoques';
@@ -145,13 +150,18 @@ CREATE TABLE lojas.envios (
                 CONSTRAINT envio_id PRIMARY KEY (envio_id)
 );
 
+/*Acrescenta restrições a coluna status da tabela envios*/
+ALTER TABLE lojas.envios
+ADD CONSTRAINT cc_lojas_envios_status
+CHECK (status IN('criado', 'enviado', 'transito', 'entregue'));
+
 /*comentarios acerca da tabela envios e suas colunas*/
-COMMENT ON TABLE lojas.envios IS 'tabela de envios';
-COMMENT ON COLUMN lojas.envios.envio_id IS 'id de envio';
-COMMENT ON COLUMN lojas.envios.loja_id IS 'id da loja';
-COMMENT ON COLUMN lojas.envios.cliente_id IS 'id do cliente';
+COMMENT ON TABLE  lojas.envios                  IS 'tabela de envios';
+COMMENT ON COLUMN lojas.envios.envio_id         IS 'id de envio';
+COMMENT ON COLUMN lojas.envios.loja_id          IS 'id da loja';
+COMMENT ON COLUMN lojas.envios.cliente_id       IS 'id do cliente';
 COMMENT ON COLUMN lojas.envios.endereco_entrega IS 'endereco para envio';
-COMMENT ON COLUMN lojas.envios.status IS 'status do envio';
+COMMENT ON COLUMN lojas.envios.status           IS 'status do envio';
 
 
 /*Criação da tabela pedidos e suas colunas*/
@@ -165,6 +175,11 @@ CREATE TABLE lojas.pedidos (
   /*cria a primary key da tabela*/
                 CONSTRAINT pedido_id PRIMARY KEY (pedido_id)
 );
+
+/*Acrescenta restrições a coluna status em pedidos*/
+ALTER TABLE lojas.pedidos
+ADD CONSTRAINT cc_lojas_pedidos_status
+CHECK (status IN('cancelado', 'completo', 'aberto', 'pago', 'reembolsado', 'enviado'));
 
 /*comentarios acerca da tabela pedidos e suas colunas*/
 COMMENT ON TABLE lojas.pedidos IS 'Tabela que identifica os pedidos';
@@ -187,6 +202,11 @@ CREATE TABLE lojas.pedidos_itens (
   /*cria a primary key da tabela*/
                 CONSTRAINT itens_id PRIMARY KEY (pedido_id, produto_id)
 );
+
+/*Adiciona restrição a coluna quantidade*/
+ALTER TABLE lojas.pedidos_itens
+ADD CONSTRAINT cc_lojas_pedidos_itens_quantidade
+CHECK (quantidade > 0);
 
 /*comentarios acerca da tabela pedidos_itens e suas colunas*/
 COMMENT ON TABLE lojas.pedidos_itens IS 'tabela de pedidos_itens';
