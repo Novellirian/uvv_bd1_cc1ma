@@ -15,4 +15,4 @@
 ---
 
 ### Utilizando esse diagrama relacional de referência, foi criado um banco de dados de lojas UVV utilizando o SGBD Postgresql
-![alt] (https://github.com/Novellirian/uvv_bd1_cc1ma/blob/main/PSET1/lojas-uvv.png?raw=true)
+![image] (https://github.com/Novellirian/uvv_bd1_cc1ma/blob/main/PSET1/lojas-uvv.png)
