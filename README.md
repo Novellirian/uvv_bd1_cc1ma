@@ -5,7 +5,10 @@
 ### Professor: Abrantes Araújo Silva Filho
 
 ### Aluno: Rian Novelli Barcellos
+---
 
-• [GIT]
-• [GitHub]
-• [PostgreSQL]
+#### • GIT
+
+#### • GITHUB
+
+#### • POSTGRESQL
