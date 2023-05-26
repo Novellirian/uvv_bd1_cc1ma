@@ -13,12 +13,13 @@ PASSWORD '12345';
 
 /*criação do database*/
 CREATE DATABASE uvv  WITH
+OWNER = rian
 TEMPLATE = template0
 ENCODING = 'UTF8'
 LC_COLLATE = 'pt_BR.UTF-8'
 LC_CTYPE = 'pt_BR.UTF-8'
 ALLOW_CONNECTIONS = TRUE
-OWNER = rian;
+CONNECTION LIMIT = -1;
 
 /*conexão com o banco de dados*/
 \c uvv rian;
